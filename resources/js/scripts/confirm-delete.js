@@ -12,8 +12,8 @@ function confirmrow(i) {
   var modal = $('.confirm_row_'+ i).data("route");
   var C_modal = $('.confirm_row_'+ i).data("a_name");
   var row = $('.confirm_row_'+ i).parents('tr'); 
-   
-  console.log(row);
+  var block = $('.confirm_block_'+ i); 
+    
   var location = $('.confirm_row_'+ i).data("location");
     Swal.fire({
       title: 'هل انت متاكد من حذف ' + C_modal ,
@@ -38,7 +38,8 @@ function confirmrow(i) {
             if(location == 10){
                 window.location.href = "/" + modal ; 
             }
-            row.fadeOut();  
+            row.fadeOut();   
+            block.fadeOut(); 
  
           },
           error: function (data) {
