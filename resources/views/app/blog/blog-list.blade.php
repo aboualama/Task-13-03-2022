@@ -9,27 +9,27 @@
  
 
 @section('content')
-<!-- Search bar -->
 
-
-<div class="col-12">
-  <div class="form-group"> 
-    <form class="d-flex" action="{{ route('search') }}" method="POST">
-      @csrf 
-        <input type="text" class="form-control" placeholder="Search here" name="search"/> 
-        <button class=" btn btn-primary" type="submit">
-          <i data-feather="search"></i></button>
-      </div>
-  </form>
-  </div>
-</div>
  
  
-<!--/ Search bar -->
 
 <!-- Blog List -->
 <div class="blog-list-wrapper">
-  <!-- Blog List Items -->
+
+<!-- Search bar -->
+  <div class="col-12">
+    <div class="form-group"> 
+      <form class="d-flex" action="{{ route('search') }}" method="POST">
+        @csrf 
+          <input type="text" class="form-control" placeholder="Search here" name="search"/> 
+          <button class=" btn btn-primary" type="submit">
+            <i data-feather="search"></i></button>
+        </div>
+    </form>
+    </div>
+  </div>
+
+  <!-- Blog List Items --> 
   <div class="row">
     
     @forelse ($records as $record) 
