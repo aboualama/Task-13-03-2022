@@ -12,9 +12,8 @@ class ComposerServiceProvider extends ServiceProvider
      * @return void
      */
     public function boot()
-    {
-        view()->composer('*',"App\Http\ViewComposer\ViewComposer");
-        view()->composer(['/app/employees/app_employees','/app/employees/app-employee-view'],"App\Http\ViewComposer\EmployeeViewComposer");
+    { 
+        //
     }
 
     /**

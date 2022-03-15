@@ -28,6 +28,8 @@ Route::group(['middleware' => ['api']], function () {
  
 Route::group(['middleware' => ['auth:api', 'verified']], function () { 
 
-    Route::get('/category', [CategoryController::class,'getall']);
+    Route::get('/categories', [CategoryController::class,'get_categories']);
+    Route::get('/posts', [CategoryController::class,'get_posts']);
+    Route::get('/post/{id}', [CategoryController::class,'show_post']);
  
 });

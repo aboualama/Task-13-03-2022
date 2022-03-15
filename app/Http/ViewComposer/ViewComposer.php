@@ -10,7 +10,7 @@ class ViewComposer {
     
     public function compose(View $view) {  
 
-      // $view->with('settings', Setting::first());   
+      //  
 
     }
 }

@@ -1,7 +1,7 @@
 
 @extends('layouts/contentLayoutMaster')
 
-@section('title', 'Blog Edit')
+@section('title', $pageTitel)
 
 @section('vendor-style')
   <link rel="stylesheet" href="{{asset(mix('vendors/css/forms/select/select2.min.css'))}}">
@@ -69,12 +69,13 @@
               </div>
 
               <div class="col-12">
-                <div class="form-group mb-1">
+                <div class="form-group">
                   <label>المحتوي</label>
                   <div id="blog-editor-wrapper">
                     <div id="blog-editor-container">
                       <div class="editor">
                        <br /> 
+                       <br><br><br> 
                       </div>
                     </div>
                   </div>
@@ -82,13 +83,13 @@
                 </div>
               </div>
 
-              <div class="col-12 mt-2">
-                <div class="form-group mb-1">
+              <div class="col-12 mt-1">
+                <div class="form-group">
                   <label></label>
                   <div id="g-editor-wrapper">
                     <div id="blog-editr-container">
                       <div class="">
-                        <br><br><br> 
+                        <br>  
                       </div>
                     </div>
                   </div>

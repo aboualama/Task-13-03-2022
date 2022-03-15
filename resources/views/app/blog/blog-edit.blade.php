@@ -1,7 +1,7 @@
 
 @extends('layouts/contentLayoutMaster')
 
-@section('title', 'Blog Edit')
+@section('title', $pageTitel)
 
 @section('vendor-style')
   <link rel="stylesheet" href="{{asset(mix('vendors/css/forms/select/select2.min.css'))}}">
@@ -22,108 +22,100 @@
   <div class="row">
     <div class="col-12">
       <div class="card">
+        <div class="card-header">
+          <h4 class="card-title"> {{$pageTitel}}</h4>
+          <input type="hidden" id="pageTitel" value="{{$pageTitel}}">   
+        </div>
         <div class="card-body">
-          <div class="media">
-            <div class="avatar mr-75">
-              <img src="{{asset('images/portrait/small/avatar-s-9.jpg')}}" width="38" height="38" alt="Avatar" />
-            </div>
-            <div class="media-body">
-              <h6 class="mb-25">Chad Alexander</h6>
-              <p class="card-text">May 24, 2020</p>
-            </div>
-          </div>
-          <!-- Form -->
-          <form action="javascript:;" class="mt-2">
+ 
+          <!-- Form --> 
+          <form action="javascript:;" class="mt-2" id="edit_form">
+            @csrf
+            {{ method_field('PUT') }}
+            <input type="hidden" id="url" value="{{route('post.update', $record->id)}}">    
+
             <div class="row">
-              <div class="col-md-6 col-12">
+              <div class="col-md-12 col-12">
                 <div class="form-group mb-2">
-                  <label for="blog-edit-title">Title</label>
+                  <label for="blog-edit-title">العنوان</label>
                   <input
                     type="text"
                     id="blog-edit-title"
                     class="form-control"
-                    value="The Best Features Coming to iOS and Web design"
+                    name="title" value="{{ $record->title }}"
                   />
+                  <span id="title_error" class="form-text text-secondary small_error"> </span> 
                 </div>
               </div>
               <div class="col-md-6 col-12">
                 <div class="form-group mb-2">
-                  <label for="blog-edit-category">Category</label>
-                  <select id="blog-edit-category" class="select2 form-control" multiple>
-                    <option value="Fashion" selected>Fashion</option>
-                    <option value="Food">Food</option>
-                    <option value="Gaming" selected>Gaming</option>
-                    <option value="Quote">Quote</option>
-                    <option value="Video">Video</option>
+                  <label for="blog-edit-category">التصنيف</label>
+                  <select id="blog-edit-category" class="select2 form-control" name="category_id"> 
+                    @foreach ($categories as $category)
+                      <option value="{{$category->id}}" {{($record->category->id == $category->id) ? 'selected' : ''}}>{{$category->title}}</option>  
+                    @endforeach
                   </select>
-                </div>
+                </div> 
               </div>
+ 
               <div class="col-md-6 col-12">
                 <div class="form-group mb-2">
-                  <label for="blog-edit-slug">Slug</label>
-                  <input
-                    type="text"
-                    id="blog-edit-slug"
-                    class="form-control"
-                    value="the-best-features-coming-to-ios-and-web-design"
-                  />
-                </div>
-              </div>
-              <div class="col-md-6 col-12">
-                <div class="form-group mb-2">
-                  <label for="blog-edit-status">Status</label>
-                  <select class="form-control" id="blog-edit-status">
-                    <option value="Published">Published</option>
-                    <option value="Pending">Pending</option>
-                    <option value="Draft">Draft</option>
+                  <label for="blog-edit-status">الحالة</label>
+                  <select class="form-control" id="blog-edit-status" name="status">
+                    <option value="Published" {{($record->status == "Published") ? 'selected' : ''}}>Published</option>
+                    <option value="Pending" {{($record->status == "Pending") ? 'selected' : ''}}>Pending</option>
+                    <option value="Draft" {{($record->status == "Draft") ? 'selected' : ''}}>Draft</option>
                   </select>
-                </div>
+                </div> 
               </div>
+
               <div class="col-12">
-                <div class="form-group mb-2">
-                  <label>Content</label>
+                <div class="form-group">
+                  <label>المحتوي</label>
                   <div id="blog-editor-wrapper">
                     <div id="blog-editor-container">
                       <div class="editor">
-                        <p>
-                          Cupcake ipsum dolor sit. Amet dessert donut candy chocolate bar cotton dessert candy
-                          chocolate. Candy muffin danish. Macaroon brownie jelly beans marzipan cheesecake oat cake.
-                          Carrot cake macaroon chocolate cake. Jelly brownie jelly. Marzipan pie sweet roll.
-                        </p>
-                        <p><br /></p>
-                        <p>
-                          Liquorice dragée cake chupa chups pie cotton candy jujubes bear claw sesame snaps. Fruitcake
-                          chupa chups chocolate bonbon lemon drops croissant caramels lemon drops. Candy jelly cake
-                          marshmallow jelly beans dragée macaroon. Gummies sugar plum fruitcake. Candy canes candy
-                          cupcake caramels cotton candy jujubes fruitcake.
-                        </p>
+                        {{ $record->title }}
+                      </div>
+                    </div>
+                  </div>
+                  <span id="content_error" class="form-text text-secondary small_error"> </span> 
+                </div>
+              </div>
+
+              <div class="col-12 mt-1">
+                <div class="form-group">
+                  <label></label>
+                  <div id="g-editor-wrapper">
+                    <div id="blog-editr-container">
+                      <div class="">
+                        <br>  
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
+
+
+
               <div class="col-12 mb-2">
                 <div class="border rounded p-2">
-                  <h4 class="mb-1">Featured Image</h4>
+                  <h4 class="mb-1">الصورة الرئيسية</h4>
                   <div class="media flex-column flex-md-row">
-                    <img
-                      src="{{asset('images/slider/03.jpg')}}"
-                      id="blog-feature-image"
+                    <img src="{{ asset('uploads/image/post/'. ($record->image ?? 'default.jpg')) }}" id="blog-feature-image"
                       class="rounded mr-2 mb-1 mb-md-0"
                       width="170"
                       height="110"
-                      alt="Blog Featured Image"
+                      alt="Blog Image"
                     />
                     <div class="media-body">
-                      <h5 class="mb-0">Main image:</h5>
-                      <small class="text-muted">Required image resolution 800x400, image size 10mb.</small>
+                      <h5 class="mb-2 mt-2"> اختار صورة :</h5> 
                       <p class="my-50">
-                        <a href="javascript:void(0);" id="blog-image-text">C:\fakepath\banner.jpg</a>
-                      </p>
+                       </p>
                       <div class="d-inline-block">
                         <div class="form-group mb-0">
                           <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="blogCustomFile" accept="image/*" />
+                            <input type="file" class="custom-file-input" id="blogCustomFile" accept="image/*" name="image"/>
                             <label class="custom-file-label" for="blogCustomFile">Choose file</label>
                           </div>
                         </div>
@@ -131,10 +123,11 @@
                     </div>
                   </div>
                 </div>
+                <span id="image_error" class="form-text text-secondary small_error"> </span> 
               </div>
               <div class="col-12 mt-50">
-                <button type="submit" class="btn btn-primary mr-1">Save Changes</button>
-                <button type="reset" class="btn btn-outline-secondary">Cancel</button>
+                <button type="submit" id="edit_submit" class="btn btn-primary mr-1"> تعديل</button>
+                <button type="reset" class="btn btn-outline-secondary">إلغاء</button>
               </div>
             </div>
           </form>
@@ -152,8 +145,63 @@
 <script src="{{asset(mix('vendors/js/editors/quill/katex.min.js'))}}"></script>
 <script src="{{asset(mix('vendors/js/editors/quill/highlight.min.js'))}}"></script>
 <script src="{{asset(mix('vendors/js/editors/quill/quill.min.js'))}}"></script>
+<script src="{{ asset(mix('vendors/js/extensions/toastr.min.js')) }}"></script>   
 @endsection
 
 @section('page-script')
 <script src="{{asset(mix('js/scripts/pages/page-blog-edit.js'))}}"></script>
+<script src="{{ asset(mix('js/scripts/confirm-delete.js')) }}"></script>   
+
+<script>
+  $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}}); 
+ 
+ $(document).on('click', '#edit_submit', function (e) {
+     e.preventDefault();
+     
+     var editor = $('.editor').text();  
+     var pageTitel = $("#pageTitel").val(); 
+     $(".small_error").text('');
+     var url = $("#url").val(); 
+     console.log(url);
+     var formData = new FormData($('#edit_form')[0]); 
+         formData.append('content', editor);
+     $.ajax({
+         type: 'post',
+         enctype: 'multipart/form-data',
+         url: url,
+         data: formData,
+         processData: false,
+         contentType: false,
+         cache: false,
+         success: function (data) { 
+             if (data.status == 442){
+               $.each(data.errors, function (key, val) {
+                 var newchar = '_'
+                 var str = key.split('.').join(newchar); 
+                 $("#" + str + "_error").text(val[0]); 
+               });
+             }else{  
+                 toastr['success'](
+                       'تم التعديل بنجاح ',
+                       pageTitel   ,
+                       {
+                         closeButton: true,
+                         tapToDismiss: false, 
+                         positionClass: 'toast-top-right',
+                         rtl: 'rtl'
+                       }
+                     );    
+                 setInterval(function(){ 
+                   window.location.href = "{{route('post.index')}}"; 
+                 }, 3000);
+             }
+         }, error: function (xhr) {
+ 
+         }
+     });
+ });
+ 
+</script>
 @endsection
+
+ 

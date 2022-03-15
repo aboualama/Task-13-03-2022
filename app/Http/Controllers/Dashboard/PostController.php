@@ -65,21 +65,26 @@ class PostController extends Controller
 
  
     public function show(Post $post)
-    {
-        return 'sssssssssss';
+    {       
+        $post->increment('views');
+        $pageConfigs = ['pageHeader' => false];
+        return view('/app/blog/blog-detail', ['record' => $post, 'pageConfigs' => $pageConfigs]); 
     }
 
  
     public function edit(Post $post)
     {
-        //
+        $record = $post;  
+        $categories = Category::get();
+        $pageTitel = 'تعديل مقال';
+        $pageConfigs = ['pageHeader' => false];
+        return view('/app/blog/blog-edit', ['record' => $record, 'categories' => $categories, 'pageConfigs' => $pageConfigs, 'pageTitel' => $pageTitel]); 
     }
 
  
     public function update(Request $request, Post $post)
-    { 
-        $record = new Post; 
-        $record->create($request->all());
+    {   
+        $post->update($request->all());
         if (request()->hasFile('image'))
         {
             $image =  $request->file('image');
@@ -88,11 +93,10 @@ class PostController extends Controller
             $image->move($public_path , $image_name);
         }else
         {
-            $image_name = $record->logo;
-        }
-     
-        $record['logo'] = $image_name; 
-        $record->save();    
+            $image_name = $post->image;
+        } 
+        $post['image'] = $image_name; 
+        $post->save();    
     }
 
  
@@ -103,7 +107,15 @@ class PostController extends Controller
 
 
 
-
+    public function search(Request $request)
+    {
+        $search = Post::where('title', 'LIKE', "%{$request->search}%" )
+                        ->orWhere('content', 'LIKE', "%{$request->search}%")->get(); 
+        $pageTitel = 'المقالات';
+        $route = 'post';
+        $pageConfigs = ['pageHeader' => false];
+        return view('/app/blog/blog-list', ['records' => $search, 'pageTitel' => $pageTitel, 'route' => $route, 'pageConfigs' => $pageConfigs]); 
+    }  
 
     public function rules()
     {

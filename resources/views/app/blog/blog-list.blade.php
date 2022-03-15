@@ -1,6 +1,6 @@
 @extends('layouts/detachedLayoutMaster')
 
-@section('title', 'Blog List')
+@section('title', $pageTitel)
 
 @section('page-style')
 {{-- Page Css files --}}
@@ -9,6 +9,24 @@
  
 
 @section('content')
+<!-- Search bar -->
+
+
+<div class="col-12">
+  <div class="form-group"> 
+    <form class="d-flex" action="{{ route('search') }}" method="POST">
+      @csrf 
+        <input type="text" class="form-control" placeholder="Search here" name="search"/> 
+        <button class=" btn btn-primary" type="submit">
+          <i data-feather="search"></i></button>
+      </div>
+  </form>
+  </div>
+</div>
+ 
+ 
+<!--/ Search bar -->
+
 <!-- Blog List -->
 <div class="blog-list-wrapper">
   <!-- Blog List Items -->
@@ -36,7 +54,7 @@
             </p> 
           </div>                  
           <div class="d-flex justify-content-between" style="float: left; padding:2%">
-            <button style="" class="btn-sm btn btn-success"  data-id="{{$record->id}}" > <i data-feather="edit"></i>  تعديل</button> 
+            <a href="{{route('post.edit', $record->id)}}" class="btn-sm btn btn-success"  > <i data-feather="edit"></i>  تعديل</a> 
             <button style="" class="btn-sm btn btn-danger confirm confirm_row_{{$record->id}}" onclick="confirmrow({{$record->id}})" data-id="{{$record->id}}" data-route="{{$route}}" data-a_name="{{$record->title}}"> <i data-feather="trash-2"></i>  حذف</button> 
           </div>       
         </div>     
@@ -51,5 +69,11 @@
  
 </div>
 <!--/ Blog List -->
+
+
+
+ 
+
 @endsection
+ 
  

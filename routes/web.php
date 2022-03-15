@@ -28,6 +28,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
   Route::resource('category', CategoryController::class); 
   Route::resource('post', PostController::class); 
 
+  Route::post('search', [PostController::class,'search'])->name('search');
+  
   // Setting Route 
   Route::get('settings', [SettingController::class,'index'])->name('app-settings');
   Route::post('settings', [SettingController::class,'update'])->name('edit-settings'); 

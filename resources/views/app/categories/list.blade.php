@@ -24,7 +24,7 @@
       </div>
       <div class="card-body">
         <p class="card-text">  
-            جدول لعرض وتعديل وحذف {{$pageTitel}}    
+            جدول لعرض وتعديل وحذف {{$pageTitel}}     
         </p>
       </div>
       

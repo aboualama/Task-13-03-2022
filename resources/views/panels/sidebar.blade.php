@@ -76,23 +76,27 @@ $configData = Helper::applClasses();
               <span class="menu-item text-truncate">قائمة المستخدمين</span>
             </a> 
           </li> 
-          <li class="{{ Route::currentRouteName() === "user-view"  ? 'active' : 'disabled' }}">
-            <a href="/user/view" class="d-flex align-items-center" target="_self"> 
-              <i data-feather="{{ Route::currentRouteName() === "user-view"  ? 'eye' : 'eye-off' }}"></i>  
-              <span class="menu-item text-truncate">عرض بيانات مستخدم</span>
-            </a> 
-          </li> 
-          <li class="{{ Route::currentRouteName() === "user-edit"  ? 'active' : 'disabled' }}">
-            <a href="/user/edit" class="d-flex align-items-center" target="_self"> 
-              <i data-feather="{{ Route::currentRouteName() === "user-edit"  ? 'eye' : 'eye-off' }}"></i>  
-              <span class="menu-item text-truncate">تعديل بيانات مستخدم</span>
-            </a> 
-          </li> 
         </ul> 
       </li> 
      
  
 
+
+      <li class="nav-item {{ Route::currentRouteName() === ''  ? 'active' : '' }} {{ $custom_classes }}">
+        <a href="javascript:void(0)" class="d-flex align-items-center" target="_self">
+          <i data-feather="users"></i>
+          <span class="menu-title text-truncate">الاقسام</span> 
+        </a>  
+        <ul class="menu-content"> 
+          <li class="{{ Route::currentRouteName() === "category.index"  ? 'active' : '' }} " > 
+            <a href="/category" class="d-flex align-items-center" target="_self"> 
+              <i data-feather="circle"></i> 
+              <span class="menu-item text-truncate">قائمة الاقسام</span>
+            </a> 
+          </li>   
+        </ul> 
+      </li> 
+     
       <li class="nav-item {{ Route::currentRouteName() === ''  ? 'active' : '' }} {{ $custom_classes }}">
         <a href="javascript:void(0)" class="d-flex align-items-center" target="_self">
           <i data-feather="users"></i>
@@ -113,97 +117,10 @@ $configData = Helper::applClasses();
           </li>  
         </ul> 
       </li> 
-     
-
-      <li class="nav-item {{ Route::currentRouteName() === ''  ? 'active' : '' }} {{ $custom_classes }}">
-        <a href="javascript:void(0)" class="d-flex align-items-center" target="_self">
-          <i data-feather="users"></i>
-          <span class="menu-title text-truncate">الاقسام</span> 
-        </a>  
-        <ul class="menu-content"> 
-          <li class="{{ Route::currentRouteName() === "category.index"  ? 'active' : '' }} " > 
-            <a href="/category" class="d-flex align-items-center" target="_self"> 
-              <i data-feather="circle"></i> 
-              <span class="menu-item text-truncate">قائمة الاقسام</span>
-            </a> 
-          </li>   
-        </ul> 
-      </li> 
-     
- 
- 
       
-      
- 
 
     </ul>
-
-
-
-
-
-
-
-
-
-
-
-
  
- 
-    {{-- to show all menu --}}
-
-     @php
-    $show = "1"; 
-    @endphp 
-    
-     <ul class="navigation navigation-main" id="main-menu-navigation2" data-menu="menu-navigation" style="display: {{$show === "1" ? 'none' : '' }}" > 
-          
-           @if(isset($menuData[0]))
-          @foreach($menuData[0]->menu as $menu)
-          @if(isset($menu->navheader))
-          <li class="navigation-header">
-            <span>{{ __('locale.'.$menu->navheader) }}</span>
-            <i data-feather="more-horizontal"></i>
-          </li>
-          @else 
-           
-           @php
-          $custom_classes = "";
-          if(isset($menu->classlist)) {
-          $custom_classes = $menu->classlist;
-          }
-          @endphp 
-           <li class="nav-item {{ Route::currentRouteName() === $menu->slug ? 'active' : '' }} {{ $custom_classes }}">
-            <a href="{{isset($menu->url)? url($menu->url):'javascript:void(0)'}}" class="d-flex align-items-center" target="{{isset($menu->newTab) ? '_blank':'_self'}}">
-              <i data-feather="{{ $menu->icon }}"></i>
-              <span class="menu-title text-truncate">{{ __('locale.'.$menu->name) }}</span>
-              @if (isset($menu->badge))
-              @php $badgeClasses = "badge badge-pill badge-light-primary ml-auto mr-1" @endphp 
-              @endif
-            </a>
-            @if(isset($menu->submenu))
-            @include('panels/submenu', ['menu' => $menu->submenu])
-            @endif
-          </li>
-          @endif
-          @endforeach
-          @endif 
-       
-     
-        </ul>
-
-
-
-
-
-
-
-
-
-    
-
-
 
   </div>
 </div>

@@ -66,30 +66,25 @@
 
             <div class="col-md-6 col-12">
               <div class="form-group">
-                <label for="itemname">أسم المدرسة</label>
+                <label for="itemname">الاسم</label>
                 <span class="form-text text-danger" id="name">{{$record->name}} </span>
               </div>
             </div>
 
             <div class="col-md-6 col-12">
               <div class="form-group">
-                <label for="itemname">مديرة الكلية</label>
+                <label for="itemname">الادارة </label>
                 <span class="form-text text-danger" id="name">{{$record->manger}} </span>
               </div>
             </div>
 
             <div class="col-md-6 col-6">
               <div class="form-group">
-                <label for="itemname">هاتف المدرسة </label>
+                <label for="itemname">الهاتف  </label>
                 <span class="form-text text-danger " id="phone">{{$record->phone}} </span>
               </div>
             </div>
-            <div class="col-md-6 col-6">
-              <div class="form-group">
-                <label for="itemname">جوال المدرسة </label>
-                <span class="form-text text-danger " id="phone">{{$record->cell}} </span>
-              </div>
-            </div>
+    
             <div class="col-md-12 col-12">
               <div class="form-group">
                 <label for="itemzone">البريد الاليكتروني</label>
@@ -97,27 +92,8 @@
               </div>
             </div>
 
-            <div class="col-md-12 col-12">
-              <div class="form-group">
-                <label for="itemzone">الرسالة</label>
-                <span class="form-text text-danger " id="phone">{!!$record->message!!} </span>
-              </div>
-            </div>
-
-            <div class="col-md-12 col-12">
-              <div class="form-group">
-                <label for="itemzone">الرؤية</label>
-                <span class="form-text text-danger " id="phone">{!!$record->vision!!} </span>
-              </div>
-            </div>
-
-            <div class="col-md-12 col-12">
-              <div class="form-group">
-                <label for="itemzone">الاهداف</label>
-                <span class="form-text text-danger " id="phone">{!!$record->goals!!} </span>
-              </div>
-            </div>
-
+ 
+ 
           </div>
 
 
@@ -190,7 +166,7 @@
                     <div class="row d-flex">
                       <div class="col-md-12 col-12">
                         <div class="form-group">
-                          <label for="itemname">أسم المدرسة</label>
+                          <label for="itemname">ألاسم </label>
                           <input type="text" class="form-control" id="itemname" name="name" value="{{$record->name}}" placeholder="أسم المدرسة" />
                           <span id="name_error" class="form-text text-danger small_error"> </span>
                         </div>
@@ -198,7 +174,7 @@
 
                       <div class="col-md-12 col-12">
                         <div class="form-group">
-                          <label for="itemname">مديرة الكلية</label>
+                          <label for="itemname"> الادمن</label>
                           <input type="text" class="form-control" id="itemname" name="manger" value="{{$record->manger}}" placeholder="مدير الادارة"  />
                           <span id="manger_error" class="form-text text-danger small_error"> </span>
                         </div>
@@ -206,18 +182,12 @@
 
                       <div class="col-md-6 col-6">
                         <div class="form-group">
-                          <label for="itemname">هاتف المدرسة </label>
+                          <label for="itemname">الهاتف  </label>
                           <input type="text" class="form-control" id="itemphone" name="phone" value="{{$record->phone}}" placeholder="هاتف المدرسة" />
                           <span id="phone_error" class="form-text text-danger small_error"> </span>
                         </div>
                       </div>
-                      <div class="col-md-6 col-6">
-                        <div class="form-group">
-                          <label for="itemname">جوال المدرسة </label>
-                          <input type="text" class="form-control" id="itemcell" name="cell" value="{{$record->cell}}" placeholder="جوال المدرسة " />
-                          <span id="cell_error" class="form-text text-danger small_error"> </span>
-                        </div>
-                      </div>
+           
                       <div class="col-md-12 col-12">
                         <div class="form-group">
                           <label for="itemzone">البريد الاليكتروني</label>
@@ -225,29 +195,8 @@
                           <span id="email_error" class="form-text text-danger small_error"> </span>
                         </div>
                         </div>
-                        <div class="col-12">
-                          <div class="form-group">
-                            <label for="exampleFormControlTextarea1">الرسالة</label>
-                            <textarea class="form-control CKeditor " id="exampleFormControlTextarea1" name="message" rows="3" placeholder="الرسالة">{{$record->message}}</textarea>
-                            <span id="message_error" class="form-text text-danger small_error"> </span>
-                          </div>
-                        </div>
-
-                        <div class="col-12">
-                          <div class="form-group">
-                            <label for="exampleFormControlTextarea2">الرؤية</label>
-                            <textarea class="form-control CKeditor " id="exampleFormControlTextarea2" name="vision" rows="3" placeholder="الرؤية">{{$record->vision}}</textarea>
-                            <span id="vision_error" class="form-text text-danger small_error"> </span>
-                          </div>
-                        </div>
-
-                        <div class="col-12">
-                          <div class="form-group">
-                            <label for="exampleFormControlTextarea3">الاهداف</label>
-                            <textarea class="form-control CKeditor" id="exampleFormControlTextarea3" name="goals" rows="3" placeholder="الاهداف">{{$record->goals}}</textarea>
-                            <span id="message_error" class="form-text text-danger small_error"> </span>
-                          </div>
-                        </div>
+                 
+ 
                       </div>
                     </div>
                     <hr />
